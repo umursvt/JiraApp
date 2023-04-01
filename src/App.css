@@ -68,3 +68,11 @@
   color: white;
   margin-right: 10px;
 }
+
+.task-form-update form {
+  width: 300px;
+}
+.task-form-update form button {
+  color: white;
+  background-color: purple;
+}
