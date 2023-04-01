@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import Task from './Task';
 
-function TaskShow({ task, onDelete }) {
+function TaskShow({ task, onDelete, onUpdate }) {
   const handleDelete = () => {
     onDelete(task.id);
   };
-  const [update, setUpdate] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const handleUpdate = () => {
-    setUpdate(!update);
+    setEdit(!edit);
+  };
+  const handleSubmit = (id, UpdatedText, updatedDesc) => {
+    setEdit(false);
+    onUpdate(id, UpdatedText, updatedDesc);
   };
   return (
     <div className=" task-show ">
-      {update ? (
+      {edit ? (
         <>
-          <Task task={task} taskFormUpdate={true} />
+          <Task task={task} taskFormUpdate={true} onUpdate={handleSubmit} />
         </>
       ) : (
         <div>

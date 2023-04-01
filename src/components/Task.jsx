@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Task({ onCreate, task, taskFormUpdate }) {
+function Task({ onCreate, task, taskFormUpdate, onUpdate }) {
   const [text, setText] = useState(task ? task.text : '');
   const [desc, setDesc] = useState(task ? task.desc : '');
 
@@ -13,16 +13,6 @@ function Task({ onCreate, task, taskFormUpdate }) {
     setDesc(event.target.value);
   };
 
-  const handleEdit = (event) => {
-    // no-refresh
-    event.preventDefault();
-
-    if (text === '' || desc === '') {
-      alert('Boşlukları doldurun!');
-      return;
-    }
-  };
-
   const handleForm = (event) => {
     //no-refresh
     event.preventDefault();
@@ -30,12 +20,21 @@ function Task({ onCreate, task, taskFormUpdate }) {
       alert('Boşlukları doldurun!');
       return;
     }
+
     //sending props
     onCreate(text, desc);
 
     //Clear inputs
     setText('');
     setDesc('');
+  };
+  const handleEdit = (event) => {
+    event.preventDefault();
+    if (taskFormUpdate) {
+      onUpdate(task.id, text, desc);
+    } else {
+      onCreate(text, desc);
+    }
   };
   return (
     <div>
