@@ -22,6 +22,9 @@ function TaskShow({ task, onDelete, onUpdate }) {
         </>
       ) : (
         <div>
+          <p className=" task-id ">ID</p>
+          <span>{task.id}</span>
+
           <h3 className="task-title">Göreviniz</h3>
           <p>{task.text}</p>
           <h3 className="task-title">Yapılacaklar</h3>
